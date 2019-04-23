@@ -1,4 +1,5 @@
 require("dotenv").config();
+var moment = require("moment");
 const Spotify = require("node-spotify-api");
 var axios = require("axios");
 var keys = require("./keys.js");
@@ -26,6 +27,23 @@ switch (request) {
     break;
 }
 
+//  function spotifyThis(){
+//    if(userInput === ""){
+//      spotify.search({type: "track", query: "The Sign"}, function(data){
+//       console.log("Artist: " + data.tracks.items[0].artists[0].name);
+//       console.log("Title: " + data.tracks.items[0].name);
+//       console.log("Preview: " + data.tracks.items[0].preview_url);
+//       console.log("Album: " + data.tracks.items[0].album.name);
+//      })
+//    } else {
+//      spotify.search({type: "track", query: `${userInput}`}, function(data){
+//       console.log("Artist: " + data.tracks.items[0].artists[0].name);
+//       console.log("Title: " + data.tracks.items[0].name);
+//       console.log("Preview: " + data.tracks.items[0].preview_url);
+//       console.log("Album: " + data.tracks.items[0].album.name);
+//      })
+//    }
+//  }
 
 function spotifyThis() {
   spotify.search({type: "track", query: `${userInput}`}, function(error, data){
@@ -72,12 +90,15 @@ function omdbThis() {
 }
 
 function bitThis() {
-  axios.get(`https://rest.bandsintown.com/artists/${userInput}/events?app_id=codingbootcamp`).then(
+  axios.get(`https://rest.bandsintown.com/artists/${userInput.trim()}/events?app_id=codingbootcamp`).then(
     function(response){
+    // console.log(response)
     for (var i = 0; i < response.data.length; i ++){
+    console.log("=============================")
     console.log(response.data[i].venue.name);
     console.log(response.data[i].venue.city);
-    console.log(response.data[i].datetime);
+    console.log(moment(response.data[i]).format("MM-DD-YYYY"));
+    console.log("=============================")
     }
     }
   )
@@ -95,11 +116,11 @@ function doIt() {
       omdbThis();
 
     } else if (request === "concert-this") {
-      console.log(dataArr[1])
+      console.log(userInput)
       bitThis();
       
     } else {
-      console.log(error)
+      return console.log(error)
     }
   })
 }

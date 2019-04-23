@@ -1,4 +1,4 @@
-console.log("this is loaded");
+// console.log("this is loaded");
 
 const Spotify = require('node-spotify-api')
 
