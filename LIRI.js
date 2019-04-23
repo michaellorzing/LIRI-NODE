@@ -44,22 +44,6 @@ function spotifyThis() {
   })
 }
 
-// function spotifyThis() {
-//   spotify.search({
-//     type: "track",
-//     query: `${userInput}`
-//   }, function (error, data) {
-//     if (error) {
-//       console.log(error)
-//     } else {
-//       console.log("Artist: " + data.tracks.items[0].artists[0].name);
-//       console.log("Title: " + data.tracks.items[0].name);
-//       console.log("Preview: " + data.tracks.items[0].preview_url);
-//       console.log("Album: " + data.tracks.items[0].album.name);
-//     }
-//   })
-// };
-
 
 function omdbThis() {
   if (userInput === "") {
